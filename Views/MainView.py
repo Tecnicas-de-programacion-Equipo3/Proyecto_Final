@@ -1,32 +1,36 @@
 from tkinter import Tk , PhotoImage , Label
 from Views.Labels import BackGround
-import win32com.client
-
-from Views.Buttons import ChangeRoomButton
 from Views.ToggleButton import ToggleButton
 
 class MainView(Tk):
     class Images:
         house = "assets/BackGhouse.png"
-        comedor = "assets/comedor.png"
-        sala = "assets/sala.png"
-        recamara = "assets/sleep.png"
+        comedor_on = "assets/comedor_on.png"
+        comedor_off = "assets/comedor_off.png"
+        sala_on = "assets/sala_on.png"
+        sala_off = "assets/sala_off.png"
+        room_on = "assets/sleep_on.png"
+        room_off = "assets/sleep_off.png"
         parking_close = "assets/garaje_closed.png"
         parking_open = "assets/garaje_opened.png"
+        sensor_on = "assets/movement_on.png"
+        sensor_off = "assets/movement_off.png"
         lecturas = "assets/lecturas.png"
-        on = "assets/on.png"
-        off = "assets/off.png"
-        sensor = "assets/movement.png"
 
     class Positions:
         x_house =50
         y_house = 5
+        x_temp = 770
+        y_temp = 60
         x_garaje =750
         y_garaje =480
-        x_comedor_habitacion1 = 140
-        y_comedor_sala = 455
-        x_sala_habitacion2 = 495
-        y_habitaciones = 254
+        x_comedor_habitacion1 = 138
+        y_comedor_sala = 456
+        x_sala_habitacion2 = 493
+        y_habitaciones = 255
+        x_sensor = 745
+        y_sensor = 200
+        x_clock_term =700
 
     class Constants:
         title = "Smart House"
@@ -34,10 +38,14 @@ class MainView(Tk):
         up_button_height = 100
         low_button_height = 125
         width = 1000
+        width_clock_term = 260
         widthB =600
         widthT = 211
         bg = "#eee8dc"
-
+        bgS = '#b22222'
+        bg_temp = '#D0E9F3'
+        font_type = 'Haettenschweiler'
+        font_size = 50
 
         @classmethod
         def size(cls):
@@ -55,43 +63,24 @@ class MainView(Tk):
         self.__interfaz_configure()
 
 
-
-
-
     def __interfaz_configure(self, tap_handler = None):
 
-        self.__the_house = PhotoImage(file=self.Images.house)
-        self.__backG = BackGround(self, self.Positions.x_house, self.Positions.y_house, image=self.__the_house, width=self.Constants.widthB,text=None)
+        self.__the_house = PhotoImage(file = self.Images.house)
+        self.__backG = BackGround(self, self.Positions.x_house, self.Positions.y_house, image = self.__the_house, width = self.Constants.widthB, text=None)
 
-        self.__clock_term= PhotoImage(file=self.Images.lecturas)
-        self.__backG = BackGround(self, 700, self.Positions.y_house, image=self.__clock_term, width=260, text=None)
+        self.__clock_term= PhotoImage(file = self.Images.lecturas)
+        self.__backG = BackGround(self, self.Positions.x_clock_term, self.Positions.y_house, image=self.__clock_term, width=self.Constants.width_clock_term, text=None)
 
-        self.__sens = PhotoImage(file=self.Images.sensor)
-        self.__sen_mov = BackGround(self, 720, 180, image=self.__sens, width=230, text=None)
+        self.__term = Label(self, font=(self.Constants.font_type, self.Constants.font_size), bg=self.Constants.bg_temp, text='22')
+        self.__term.place(x = self.Positions.x_temp,y = self.Positions.y_temp)
 
-
-
-        self.__term = Label(self, font=('Haettenschweiler', 50, 'bold'), bg='#D0E9F3', fg='BLACK', bd=0 , text='22')
-        self.__term.place(x=770,y=60),
-
-        self.__sala = PhotoImage(file = self .Images.sala)
-        self.__living_room_button = ChangeRoomButton(self, self.Positions.x_sala_habitacion2, self.Positions.y_comedor_sala,self.Constants.low_button_height,"You are in the living room" ,self.__sala , action = self.__did_button_tap)
-
-        self.__comedor = PhotoImage(file = self .Images.comedor)
-        self.__dining_room_button = ChangeRoomButton(self, self.Positions.x_comedor_habitacion1, self.Positions.y_comedor_sala,self.Constants.low_button_height,"You are in the living room" , self.__comedor,action = self.__did_button_tap)
-
-        self.__rooms = PhotoImage(file = self .Images.recamara)
-        self.__room1_button = ChangeRoomButton(self, self.Positions.x_comedor_habitacion1, self.Positions.y_habitaciones,self.Constants.up_button_height,"You are in the living room" , self.__rooms ,action = self.__did_button_tap)
-
-        self.__room2_button = ChangeRoomButton(self, self.Positions.x_sala_habitacion2, self.Positions.y_habitaciones,self.Constants.up_button_height,"You are in the living room" ,self.__rooms ,action = self.__did_button_tap)
-
-        self.__garge_open_close = ToggleButton(self , tap_handler,self.Positions.x_garaje, self.Positions.y_garaje, self.Images.parking_close, self.Images.parking_open, self.Constants.bg)
-        self.__on_of_sensor = ToggleButton(self , tap_handler,780, 400, self.Images.on, self.Images.off, self.Constants.bg)
+        self.__sensor_on_off = ToggleButton(self , self.__tap_button_handler,self.Positions.x_sensor, self.Positions.y_sensor, self.Images.sensor_on, self.Images.sensor_off, self.Constants.bg)
+        self.__garge_open_close = ToggleButton(self , self.__tap_button_handler,self.Positions.x_garaje, self.Positions.y_garaje, self.Images.parking_close, self.Images.parking_open, self.Constants.bg)
+        self.__on_of_room1 = ToggleButton(self , tap_handler,self.Positions.x_comedor_habitacion1 ,self.Positions.y_habitaciones, self.Images.room_on, self.Images.room_off, None)
+        self.__on_of_room2 = ToggleButton(self, tap_handler, self.Positions.x_sala_habitacion2, self.Positions.y_habitaciones, self.Images.room_on, self.Images.room_off, None)
+        self.__on_of_living_room = ToggleButton(self, tap_handler, self.Positions.x_sala_habitacion2, self.Positions.y_comedor_sala, self.Images.sala_on, self.Images.sala_off, None)
+        self.__on_of_dining_room = ToggleButton(self, tap_handler, self.Positions.x_comedor_habitacion1, self.Positions.y_comedor_sala, self.Images.comedor_on, self.Images.comedor_off, None)
 
     def __did_button_tap(self, text):
         if self.__tap_button_handler is None: return
         self.__tap_button_handler(text)
-
-    def text_to_voice(self):
-        self.speaker = win32com.client.Dispatch("SAPI.SpVoice")
-        self.speaker.Speak(self.Speaking.s)
