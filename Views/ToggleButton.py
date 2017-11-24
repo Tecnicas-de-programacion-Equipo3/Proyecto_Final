@@ -6,7 +6,7 @@ class ToggleButton(Label):
 
         event = "<Button-1>"
 
-    def __init__(self, master, tap_toggle_handler = None , x= None, y = None, file_1 = None, file_2 = None, bg = None):
+    def __init__(self, master, tap_toggle_handler = None ,room_function_room = None, x= None, y = None, file_1 = None, file_2 = None, bg = None):
         super().__init__(master)
         self.__tap_handler = tap_toggle_handler
         self.__state = False
@@ -18,6 +18,9 @@ class ToggleButton(Label):
         self.config(bg=bg)
         self.bind(self.Constants.event, self.__toggle)
         self.place(x = x , y = y)
+        self.__room_function_room = room_function_room
+
+
 
 
     def __toggle(self, event):

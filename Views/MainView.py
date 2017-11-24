@@ -50,9 +50,16 @@ class MainView(Tk):
         @classmethod
         def size(cls):
             return "{}x{}".format(cls.width, cls.heigth)
+    class RoomsAndFunctions:
+        room_1 = "Bedroom 1"
+        room_2 = "Bedroom 2"
+        livingroom = "Living room"
+        diningroom = "Diningroom"
+        garage = "Garage"
+        alarm = "Alarm"
 
-    class Speaking:
-        s = "hello"
+
+
 
     def __init__(self , tap_button_handler = None):
         super().__init__()
@@ -74,12 +81,12 @@ class MainView(Tk):
         self.__term = Label(self, font=(self.Constants.font_type, self.Constants.font_size), bg=self.Constants.bg_temp, text='22')
         self.__term.place(x = self.Positions.x_temp,y = self.Positions.y_temp)
 
-        self.__sensor_on_off = ToggleButton(self , self.__tap_button_handler,self.Positions.x_sensor, self.Positions.y_sensor, self.Images.sensor_on, self.Images.sensor_off, self.Constants.bg)
-        self.__garge_open_close = ToggleButton(self , self.__tap_button_handler,self.Positions.x_garaje, self.Positions.y_garaje, self.Images.parking_close, self.Images.parking_open, self.Constants.bg)
-        self.__on_of_room1 = ToggleButton(self , tap_handler,self.Positions.x_comedor_habitacion1 ,self.Positions.y_habitaciones, self.Images.room_on, self.Images.room_off, None)
-        self.__on_of_room2 = ToggleButton(self, tap_handler, self.Positions.x_sala_habitacion2, self.Positions.y_habitaciones, self.Images.room_on, self.Images.room_off, None)
-        self.__on_of_living_room = ToggleButton(self, tap_handler, self.Positions.x_sala_habitacion2, self.Positions.y_comedor_sala, self.Images.sala_on, self.Images.sala_off, None)
-        self.__on_of_dining_room = ToggleButton(self, tap_handler, self.Positions.x_comedor_habitacion1, self.Positions.y_comedor_sala, self.Images.comedor_on, self.Images.comedor_off, None)
+        self.__sensor_on_off = ToggleButton(self , self.__tap_button_handler, self.RoomsAndFunctions.alarm,self.Positions.x_sensor, self.Positions.y_sensor, self.Images.sensor_on, self.Images.sensor_off, self.Constants.bg)
+        self.__garge_open_close = ToggleButton(self , self.__tap_button_handler, self.RoomsAndFunctions.garage,self.Positions.x_garaje, self.Positions.y_garaje, self.Images.parking_close, self.Images.parking_open, self.Constants.bg)
+        self.__on_of_room1 = ToggleButton(self , tap_handler, self.RoomsAndFunctions.room_1, self.Positions.x_comedor_habitacion1 ,self.Positions.y_habitaciones, self.Images.room_on, self.Images.room_off, None)
+        self.__on_of_room2 = ToggleButton(self, tap_handler, self.RoomsAndFunctions.room_2, self.Positions.x_sala_habitacion2, self.Positions.y_habitaciones, self.Images.room_on, self.Images.room_off, None)
+        self.__on_of_living_room = ToggleButton(self, tap_handler, self.RoomsAndFunctions.livingroom, self.Positions.x_sala_habitacion2, self.Positions.y_comedor_sala, self.Images.sala_on, self.Images.sala_off, None)
+        self.__on_of_dining_room = ToggleButton(self, tap_handler, self.RoomsAndFunctions.diningroom, self.Positions.x_comedor_habitacion1, self.Positions.y_comedor_sala, self.Images.comedor_on, self.Images.comedor_off, None)
 
     def __did_button_tap(self, text):
         if self.__tap_button_handler is None: return
