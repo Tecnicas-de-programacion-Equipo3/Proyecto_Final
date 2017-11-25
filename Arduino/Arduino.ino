@@ -1,3 +1,8 @@
+
+#include <OneWire.h> 
+#include <DallasTemperature.h>
+
+
 int led_1 = 13;
 int led_2 = 12;
 int led_3 = 11;
@@ -8,6 +13,10 @@ int state2 = 0;
 int state3 = 0;
 int state4 = 0;
 int state5 = 0;
+int Temp = 2;
+OneWire oneWire(Temp); 
+DallasTemperature sensors(&oneWire);
+
 
 void setup() {
    Serial.begin(115200);
@@ -23,10 +32,17 @@ void setup() {
 
    pinMode(vent, OUTPUT);
    digitalWrite(vent, LOW);
+   sensors.begin(); 
+   
 
 }
 
-void loop() { }
+void loop(void) { 
+  
+  sensors.requestTemperatures();
+  Serial.print("\n"); 
+  Serial.print(sensors.getTempCByIndex(0));
+  }
 
 void serialEvent() {
     char inChar = (char)Serial.read();
