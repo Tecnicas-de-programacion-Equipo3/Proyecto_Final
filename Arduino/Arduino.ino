@@ -40,28 +40,33 @@ void setup() {
 }
 
 void loop(void) { 
-  
+  sensor_reading = proximitySensor();
+
   sensors.requestTemperatures();
 
-  sensor_reading = proximitySensor();
-  Serial.print(sensors.getTempCByIndex(0));
-  Serial.print("\n"); 
+  sendData(sensor_reading,sensors.getTempCByIndex(0));
   }
 
-void sendData(String proximity_sensor){
+void sendData(String proximity_sensor, int temperature_sensor){
   Serial.print("{");
   Serial.print("ProximitySensor: ");
   Serial.print(proximity_sensor);
   Serial.print(", ");
+  Serial.print("TemperatureSensor: ");
+  Serial.print(temperature_sensor);
   Serial.println("}");
 }
 
 String proximitySensor(){
-  int readingPIR = digitalRead(sensorpir);
+  int readingPIR = digitalRead(sensorPIR);
   if (readingPIR == HIGH){
-    delay(1500)
-    return "True"
+    delay(1500);
+    return "True";
     }
+  else{
+    delay(1500);
+    return "False";
+  }
 }
 
 void serialEvent() {
