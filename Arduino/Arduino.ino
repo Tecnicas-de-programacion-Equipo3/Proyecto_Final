@@ -48,9 +48,18 @@ void loop(void) {
   Serial.print("\n"); 
   }
 
-int proximitySensor(){
+void sendData(String proximity_sensor){
+  Serial.print("{");
+  Serial.print("ProximitySensor: ");
+  Serial.print(proximity_sensor);
+  Serial.print(", ");
+  Serial.println("}");
+}
+
+String proximitySensor(){
   int readingPIR = digitalRead(sensorpir);
   if (readingPIR == HIGH){
+    delay(1500)
     return "True"
     }
 }
