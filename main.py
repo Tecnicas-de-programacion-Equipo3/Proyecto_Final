@@ -1,9 +1,17 @@
+import serial
 from Views.MainView import MainView
+from Models.Manager import HouseManager
 
 class MainApp():
+    class Constants:
+        port = "COM3"
+        baud = 115200
+        close_event = "WM_DELETE_WINDOW"
 
     def __init__(self):
         self.__master = MainView(tap_button_handler = self.__toggle_did_change, temperature_text = self.__update_temperature)
+        self.__arduino = serial.Serial(self.Constants.port, self.Constants.baud)
+        self.__house = HouseManager()
 
     def run(self):
         self.__master.mainloop()
@@ -11,7 +19,7 @@ class MainApp():
     def __update_temperature(self):
         pass
 
-    def __toggle_did_change(self, state ):
+    def __toggle_did_change(self, state, room_name):
         pass
 
 if __name__ == "__main__":
