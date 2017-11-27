@@ -1,4 +1,10 @@
 Proyecto-Final
+
+
+Incluir librerias de Arduino(archivos en Helpers):
+OneWire
+DallasTemperature
+======
 ======
 
 ## Definición del proyecto: Casa Inteligente

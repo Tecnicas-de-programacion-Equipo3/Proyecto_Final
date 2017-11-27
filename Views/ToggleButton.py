@@ -3,7 +3,6 @@ from tkinter import Label, PhotoImage
 class ToggleButton(Label):
 
     class Constants:
-
         event = "<Button-1>"
 
     def __init__(self, master, tap_toggle_handler = None ,room_function_room = None, x = None, y = None, file_1 = None, file_2 = None, bg = None):
@@ -24,10 +23,8 @@ class ToggleButton(Label):
         self.__state = not self.__state
         image = self.__open_image if self.__state else self.__close_image
         self.__set_image(image)
-
         if self.__tap_handler is None: return
         self.__tap_handler(self.__state)
-
 
     def __set_image(self, image):
         self.configure(image = image)

@@ -1,5 +1,4 @@
 from tkinter import Label, PhotoImage
-
 class BackGround(Label):
 
     class Constants:
