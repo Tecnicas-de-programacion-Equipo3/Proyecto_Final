@@ -1,9 +1,16 @@
 Proyecto-Final
 
-
+======
+======
 Incluir librerias de Arduino(archivos en Helpers):
-OneWire
-DallasTemperature
+*OneWire
+*DallasTemperature
+
+======
+======
+Cambiar extensiones de archivos de la carpeta assets:
+*.png   para Windows
+*.PPM   para MacOs
 ======
 ======
 
