@@ -1,9 +1,6 @@
 from Views.MainView import MainView
-import serial
 
 class MainApp():
-    class Constants:
-        close_event = "WM_DELETE_WINDOW"
 
     def __init__(self):
         self.__master = MainView(tap_button_handler = self.__toggle_did_change)

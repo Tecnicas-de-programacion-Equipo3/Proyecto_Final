@@ -20,9 +20,6 @@ class ToggleButton(Label):
         self.place(x = x , y = y)
         self.__room_function_room = room_function_room
 
-
-
-
     def __toggle(self, event):
         self.__state = not self.__state
         image = self.__open_image if self.__state else self.__close_image
