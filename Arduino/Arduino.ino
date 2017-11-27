@@ -1,5 +1,4 @@
-
-#include <OneWire.h> 
+#include <OneWire.h>
 #include <DallasTemperature.h>
 
 
@@ -8,11 +7,13 @@ int led_2 = 12;
 int led_3 = 11;
 int led_4 = 10;
 int fan = 9;
+int sensorPIR = 8;
 int state_led_1 = 0;
 int state_led_2 = 0;
 int state_led_3 = 0;
 int state_led_4 = 0;
 int state_fan = 0;
+String sensor_reading = "";
 int Temp = 2;
 OneWire oneWire(Temp); 
 DallasTemperature sensors(&oneWire);
@@ -32,17 +33,41 @@ void setup() {
 
    pinMode(fan, OUTPUT);
    digitalWrite(fan, LOW);
-   sensors.begin(); 
-   
+   sensors.begin();
+
+   pinMode(sensorPIR, INPUT);
 
 }
 
 void loop(void) { 
-  
+  sensor_reading = proximitySensor();
+
   sensors.requestTemperatures();
-  Serial.print(sensors.getTempCByIndex(0));
-  Serial.print("\n"); 
+
+  sendData(sensor_reading,sensors.getTempCByIndex(0));
   }
+
+void sendData(String proximity_sensor, int temperature_sensor){
+  Serial.print("{");
+  Serial.print("ProximitySensor: ");
+  Serial.print(proximity_sensor);
+  Serial.print(", ");
+  Serial.print("TemperatureSensor: ");
+  Serial.print(temperature_sensor);
+  Serial.println("}");
+}
+
+String proximitySensor(){
+  int readingPIR = digitalRead(sensorPIR);
+  if (readingPIR == HIGH){
+    delay(1500);
+    return "True";
+    }
+  else{
+    delay(1500);
+    return "False";
+  }
+}
 
 void serialEvent() {
     char inChar = (char)Serial.read();
