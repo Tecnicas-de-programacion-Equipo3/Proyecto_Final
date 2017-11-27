@@ -11,10 +11,15 @@ class MainApp():
     def __init__(self):
         self.__master = MainView(tap_button_handler = self.__toggle_did_change, temperature_text = self.__update_temperature)
         self.__arduino = serial.Serial(self.Constants.port, self.Constants.baud)
+        self.__master.protocol(self.Constants.close_event, self.__on_closing)
         self.__house = HouseManager()
 
     def run(self):
         self.__master.mainloop()
+
+    def __on_closing(self):
+        self.__arduino.close()
+        self.__master.destroy()
 
     def __update_temperature(self):
         pass
