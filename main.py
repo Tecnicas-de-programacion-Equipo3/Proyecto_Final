@@ -9,7 +9,7 @@ class MainApp():
         self.__master.mainloop()
 
     def __toggle_did_change(self, state ):
-        value = str(1 if state else 'a').encode('ascii')
+        pass
 
 if __name__ == "__main__":
     app = MainApp()

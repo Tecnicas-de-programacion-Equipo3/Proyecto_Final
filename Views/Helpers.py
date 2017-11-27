@@ -8,6 +8,7 @@ class UIGraphics():
 
     background_graphics = [["assets/BackGhouse.png", 50, 5, 600 ,None],
         ["assets/lecturas.png",700, 5, 260, None]]
+
     digital_term = "assets/lecturas.png"
     x_clock_term = 700
     x_temp = 770

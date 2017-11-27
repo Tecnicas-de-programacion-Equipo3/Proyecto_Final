@@ -34,6 +34,4 @@ class MainView(Tk):
         for i in UIGraphics.toggle_button_grapgics:
             self.__the_image  =ToggleButton(self, self.__tap_button_handler,i[0],i[1],i[2],i[3],i[4],i[5])
 
-    def __did_button_tap(self, text):
-        if self.__tap_button_handler is None: return
-        self.__tap_button_handler(text)
+    
