@@ -1,7 +1,7 @@
-from tkinter import Tk , Label
+from tkinter import Tk, Label
+from Helpers.InterfaceConfigureParameters import UIGraphics
 from Views.Labels import BackGround
 from Views.ToggleButton import ToggleButton
-from Views.Helpers import UIGraphics
 
 class MainView(Tk):
     class Constants:
