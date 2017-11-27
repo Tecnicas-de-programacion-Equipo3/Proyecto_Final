@@ -3,7 +3,6 @@ from Helpers.InterfaceConfigureParameters import UIGraphics
 from Views.Labels import BackGround
 from Views.ToggleButton import ToggleButton
 
-
 class MainView(Tk):
     class Constants:
         title = "Smart House"
