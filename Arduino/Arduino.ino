@@ -63,11 +63,11 @@ void sendData(String proximity_sensor, int temperature_sensor){
 String proximitySensor(){
   int readingPIR = digitalRead(sensorPIR);
   if (readingPIR == HIGH){
-    delay(1500);
+    delay(1000);
     return "True";
     }
   else{
-    delay(1500);
+    delay(1000);
     return "False";
   }
 }
