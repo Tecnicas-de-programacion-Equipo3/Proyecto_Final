@@ -1,18 +1,23 @@
+from Models.ProximityAlarm import ProximityAlarm
+
 class HouseManager():
     class Constants:
         Garage = "Garage"
         Alarm = "Alarm"
 
-    def __init__(self, lights_handler = None, fan_handler = None, motor_handler = None):
-        self.__temperature_handler = lights_handler
+    def __init__(self, lights_handler = None, fan_handler = None, motor_handler = None, alarm_handler = None):
+        self.__lights_handler = lights_handler
         self.__fan_handler = fan_handler
+        self.__alarm_handler = alarm_handler
         self.__motor_handler = motor_handler
+        self.__alarm = None
 
 
     def house_menu(self, state, room):
         if room == self.Constants.Garage:
             self.garage_door()
         elif room == self.Constants.Alarm:
+            self.__alarm = ProximityAlarm(state, self.__alarm_handler)
             self.alarm()
         else:
             self.control_lights()
