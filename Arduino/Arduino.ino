@@ -14,6 +14,7 @@ int state_led_3 = 0;
 int state_led_4 = 0;
 int state_fan = 0;
 String sensor_reading = "";
+String activate_sensor = "False"
 int Temp = 2;
 OneWire oneWire(Temp); 
 DallasTemperature sensors(&oneWire);
@@ -39,12 +40,14 @@ void setup() {
 
 }
 
-void loop(void) { 
-  sensor_reading = proximitySensor();
+void loop(void) {
+    if (activate_sensor == "True"){
+        sensor_reading = proximitySensor();
+        }
 
-  sensors.requestTemperatures();
+    sensors.requestTemperatures();
 
-  sendData(sensor_reading,sensors.getTempCByIndex(0));
+    sendData(sensor_reading,sensors.getTempCByIndex(0));
   }
 
 void sendData(String proximity_sensor, int temperature_sensor){
@@ -91,5 +94,9 @@ void serialEvent() {
     if (inChar == 'e') state_fan = LOW;
     digitalWrite(fan, state_fan); 
 
+    if (inChar == 'T')
+        activate_sensor = "True";
+    if (inChar == 'F')
+        activate_sensor = "False";
     
 }
