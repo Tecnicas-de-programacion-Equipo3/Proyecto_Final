@@ -24,7 +24,7 @@ class ToggleButton(Label):
         image = self.__open_image if self.__state else self.__close_image
         self.__set_image(image)
         if self.__tap_handler is None: return
-        self.__tap_handler(self.__state)
+        self.__tap_handler(self.__state, self.__room_function_room)
 
     def __set_image(self, image):
         self.configure(image = image)
