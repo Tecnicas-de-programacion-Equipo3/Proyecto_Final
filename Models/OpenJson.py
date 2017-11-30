@@ -2,7 +2,7 @@ import json
 
 class OpenJson:
     @staticmethod
-    def oppening(file):
+    def opening(file):
         try:
             with open(file + '.json', r) as in_file:
                 json_file = json.load(in_file)
