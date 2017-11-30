@@ -7,13 +7,11 @@ int led_2 = 12;
 int led_3 = 11;
 int led_4 = 10;
 int fan = 9;
+int fan_2 = 5
 int sensorPIR = 8;
-int state_led_1 = 0;
-int state_led_2 = 0;
-int state_led_3 = 0;
-int state_led_4 = 0;
-int state_fan = 0;
+
 String sensor_reading = "";
+String activate_sensor = "False"
 int Temp = 2;
 OneWire oneWire(Temp); 
 DallasTemperature sensors(&oneWire);
@@ -33,18 +31,24 @@ void setup() {
 
    pinMode(fan, OUTPUT);
    digitalWrite(fan, LOW);
+   pinMode(fan_2, OUTPUT);
+   digitalWrite(fan_2, LOW);
+
+
    sensors.begin();
 
    pinMode(sensorPIR, INPUT);
 
 }
 
-void loop(void) { 
-  sensor_reading = proximitySensor();
+void loop(void) {
+    if (activate_sensor == "True"){
+        sensor_reading = proximitySensor();
+        }
 
-  sensors.requestTemperatures();
+    sensors.requestTemperatures();
 
-  sendData(sensor_reading,sensors.getTempCByIndex(0));
+    sendData(sensor_reading,sensors.getTempCByIndex(0));
   }
 
 void sendData(String proximity_sensor, int temperature_sensor){
@@ -60,11 +64,11 @@ void sendData(String proximity_sensor, int temperature_sensor){
 String proximitySensor(){
   int readingPIR = digitalRead(sensorPIR);
   if (readingPIR == HIGH){
-    delay(1500);
+    delay(1000);
     return "True";
     }
   else{
-    delay(1500);
+    delay(1000);
     return "False";
   }
 }
@@ -107,4 +111,18 @@ void serialEvent() {
     if (state_fan == '1') state_fan = HIGH;
     else if (state_fan == '0') state_fan = LOW;
     digitalWrite(fan, state_fan);    }
+
+    if (inChar == '6')
+    {char state = (char)Serial.read();
+    int state_fan = state;
+    if (state_fan == '1') state_fan = HIGH;
+    else if (state_fan == '0') state_fan = LOW;
+    digitalWrite(fan_2, state_fan);    }
+
+    if (inChar == 'T')
+        activate_sensor = "True";
+    if (inChar == 'F')
+        activate_sensor = "False";
+    
 }
+
