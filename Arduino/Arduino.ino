@@ -1,17 +1,17 @@
 #include <OneWire.h>
 #include <DallasTemperature.h>
-
-
 int led_1 = 13;
 int led_2 = 12;
 int led_3 = 11;
 int led_4 = 10;
 int fan = 9;
-int fan_2 = 5
+int fan_2 = 5;
 int sensorPIR = 8;
-
+int garage_motor_up = 7;
+int garage_motor_down = 6;
+int state_garage_motor = 0;
 String sensor_reading = "";
-String activate_sensor = "False"
+String activate_sensor = "False";
 int Temp = 2;
 OneWire oneWire(Temp); 
 DallasTemperature sensors(&oneWire);
@@ -28,6 +28,10 @@ void setup() {
    digitalWrite(led_3, LOW);
    pinMode(led_4, OUTPUT);
    digitalWrite(led_4, LOW);
+   pinMode(garage_motor_up,OUTPUT);
+   digitalWrite(garage_motor_up,LOW);
+   pinMode(garage_motor_down, OUTPUT);
+   digitalWrite(garage_motor_down,LOW);
 
    pinMode(fan, OUTPUT);
    digitalWrite(fan, LOW);
@@ -53,10 +57,10 @@ void loop(void) {
 
 void sendData(String proximity_sensor, int temperature_sensor){
   Serial.print("{");
-  Serial.print("ProximitySensor: ");
+  Serial.print("'ProximitySensor':'");
   Serial.print(proximity_sensor);
-  Serial.print(", ");
-  Serial.print("TemperatureSensor: ");
+  Serial.print("',");
+  Serial.print("'TemperatureSensor':");
   Serial.print(temperature_sensor);
   Serial.println("}");
 }
@@ -118,6 +122,22 @@ void serialEvent() {
     if (state_fan == '1') state_fan = HIGH;
     else if (state_fan == '0') state_fan = LOW;
     digitalWrite(fan_2, state_fan);    }
+
+
+    if (inChar == '7')
+    {char state = (char)Serial.read();
+    int state_garage_motor = state;
+    if (state_garage_motor == '1'){
+    digitalWrite(garage_motor_down,HIGH);
+    delay(10000);
+    digitalWrite(garage_motor_down,LOW);
+    }
+    if (state_garage_motor == '0'){
+    digitalWrite(garage_motor_up,HIGH);
+    delay(10000);
+    digitalWrite(garage_motor_up,LOW);
+    }
+    }
 
     if (inChar == 'T')
         activate_sensor = "True";

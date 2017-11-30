@@ -1,6 +1,7 @@
 import serial
 from Views.MainView import MainView
 from Models.Manager import HouseManager
+from Models.ReadingDatas import ReadingData
 
 class MainApp():
     class Constants:
@@ -14,6 +15,8 @@ class MainApp():
         self.__arduino = serial.Serial(self.Constants.port, self.Constants.baud)
         self.__master.protocol(self.Constants.close_event, self.__on_closing)
         self.__house = HouseManager(lights_handler = self.__controller_lights, fan_handler = None, motor_handler = None)
+        self.__datas = None
+        self.__receive_data()
 
     def run(self):
         self.__master.mainloop()
@@ -21,6 +24,11 @@ class MainApp():
     def __on_closing(self):
         self.__arduino.close()
         self.__master.destroy()
+
+    def __receive_data(self):
+        datas = self.__arduino.readline().decode()
+        self.__datas = ReadingData(datas)
+        self.__master.after(2, self.__receive_data)
 
     def __update_temperature(self):
         pass
