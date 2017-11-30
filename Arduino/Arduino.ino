@@ -12,6 +12,7 @@ int state_led_1 = 0;
 int state_led_2 = 0;
 int state_led_3 = 0;
 int state_led_4 = 0;
+int state_garage_motor = 0;
 int state_fan = 0;
 String sensor_reading = "";
 int Temp = 2;
@@ -95,16 +96,21 @@ void serialEvent() {
     if (inChar == 'e') state_fan = LOW;
     digitalWrite(fan, state_fan);
 
-    if (inChar == '7'){
+    if (inChar == '6')
+    {char state = (char)Serial.read();
+    int state_garage_motor = state;
+    if (state_garage_motor == '1'){
     digitalWrite(garage_motor_down,HIGH);
     delay(10000);
     digitalWrite(garage_motor_down,LOW);
     }
-    if (inChar == '8') {
+    if (state_garage_motor == '0'){
     digitalWrite(garage_motor_up,HIGH);
     delay(10000);
     digitalWrite(garage_motor_up,LOW);
     }
+    }
+
 
     
 }
