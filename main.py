@@ -16,7 +16,7 @@ class MainApp():
         self.__master.protocol(self.Constants.close_event, self.__on_closing)
         self.__house = HouseManager(lights_handler = self.__controller_lights, fan_handler = None, motor_handler = self.__controller_garage )
         self.__datas = None
-        self.__receive_data()
+        #self.__receive_data()
 
     def run(self):
         self.__master.mainloop()
