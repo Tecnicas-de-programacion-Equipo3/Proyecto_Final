@@ -1,13 +1,13 @@
 #include <OneWire.h>
 #include <DallasTemperature.h>
-
-
 int led_1 = 13;
 int led_2 = 12;
 int led_3 = 11;
 int led_4 = 10;
 int fan = 9;
 int sensorPIR = 8;
+int garage_motor_up = 7;
+int garage_motor_down = 6;
 int state_led_1 = 0;
 int state_led_2 = 0;
 int state_led_3 = 0;
@@ -30,6 +30,10 @@ void setup() {
    digitalWrite(led_3, LOW);
    pinMode(led_4, OUTPUT);
    digitalWrite(led_4, LOW);
+   pinMode(garage_motor_up,OUTPUT);
+   digitalWrite(garage_motor_up,LOW);
+   pinMode(garage_motor_down, OUTPUT);
+   digitalWrite(garage_motor_down,LOW);
 
    pinMode(fan, OUTPUT);
    digitalWrite(fan, LOW);
@@ -89,7 +93,18 @@ void serialEvent() {
 
     if (inChar == '5') state_fan = HIGH;
     if (inChar == 'e') state_fan = LOW;
-    digitalWrite(fan, state_fan); 
+    digitalWrite(fan, state_fan);
+
+    if (inChar == '7'){
+    digitalWrite(garage_motor_down,HIGH);
+    delay(10000);
+    digitalWrite(garage_motor_down,LOW);
+    }
+    if (inChar == '8') {
+    digitalWrite(garage_motor_up,HIGH);
+    delay(10000);
+    digitalWrite(garage_motor_up,LOW);
+    }
 
     
 }
