@@ -49,10 +49,10 @@ void loop(void) {
 
 void sendData(String proximity_sensor, int temperature_sensor){
   Serial.print("{");
-  Serial.print("ProximitySensor: ");
+  Serial.print("'ProximitySensor':'");
   Serial.print(proximity_sensor);
-  Serial.print(", ");
-  Serial.print("TemperatureSensor: ");
+  Serial.print("',");
+  Serial.print("'TemperatureSensor':");
   Serial.print(temperature_sensor);
   Serial.println("}");
 }
