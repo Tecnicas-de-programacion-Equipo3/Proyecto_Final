@@ -1,5 +1,5 @@
 class UIGraphics():
-    toggle_button_grapgics = [ ["Alarm", 745, 200, "assets/movement_on.png", "assets/movement_off.png", "#eee8dc"],
+    toggle_button_graphics = [ ["Alarm", 745, 200, "assets/movement_on.png", "assets/movement_off.png", "#eee8dc"],
         ["Garage", 750, 480, "assets/garage_closed.png", "assets/garage_opened.png", "#eee8dc"],
         ["Bedroom1", 138, 255, "assets/sleep_on.png", "assets/sleep_off.png", None],
         ["Bedroom2", 493, 255, "assets/sleep_on.png", "assets/sleep_off.png", None],
