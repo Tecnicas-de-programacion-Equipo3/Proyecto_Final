@@ -5,17 +5,13 @@ int led_2 = 12;
 int led_3 = 11;
 int led_4 = 10;
 int fan = 9;
+int fan_2 = 5;
 int sensorPIR = 8;
 int garage_motor_up = 7;
 int garage_motor_down = 6;
-int state_led_1 = 0;
-int state_led_2 = 0;
-int state_led_3 = 0;
-int state_led_4 = 0;
 int state_garage_motor = 0;
-int state_fan = 0;
 String sensor_reading = "";
-String activate_sensor = "False"
+String activate_sensor = "False";
 int Temp = 2;
 OneWire oneWire(Temp); 
 DallasTemperature sensors(&oneWire);
@@ -39,6 +35,10 @@ void setup() {
 
    pinMode(fan, OUTPUT);
    digitalWrite(fan, LOW);
+   pinMode(fan_2, OUTPUT);
+   digitalWrite(fan_2, LOW);
+
+
    sensors.begin();
 
    pinMode(sensorPIR, INPUT);
@@ -79,27 +79,52 @@ String proximitySensor(){
 
 void serialEvent() {
     char inChar = (char)Serial.read();
-    if (inChar == '1') state_led_1 = HIGH;
-    if (inChar == 'a') state_led_1 = LOW;
-    digitalWrite(led_1, state_led_1);    
-     
-    if (inChar == '2') state_led_2 = HIGH;
-    if (inChar == 'b') state_led_2 = LOW;
-    digitalWrite(led_2, state_led_2); 
-    
-    if (inChar == '3') state_led_3 = HIGH;
-    if (inChar == 'c') state_led_3 = LOW;
-    digitalWrite(led_3, state_led_3); 
-    
-    if (inChar == '4') state_led_4 = HIGH;
-    if (inChar == 'd') state_led_4 = LOW;
-    digitalWrite(led_4, state_led_4); 
 
-    if (inChar == '5') state_fan = HIGH;
-    if (inChar == 'e') state_fan = LOW;
-    digitalWrite(fan, state_fan);
+    if (inChar == '1')
+    {char state = (char)Serial.read();
+    int state_led = state;
+    if (state_led == '1') state_led = HIGH;
+    else if (state_led == '0') state_led = LOW;
+    digitalWrite(led_1, state_led);    }
+
+    if (inChar == '2')
+    {char state = (char)Serial.read();
+    int state_led = state;
+    if (state_led == '1') state_led = HIGH;
+    else if (state_led == '0') state_led = LOW;
+    digitalWrite(led_2, state_led);    }
+
+    if (inChar == '3')
+    {char state = (char)Serial.read();
+    int state_led = state;
+    if (state_led == '1') state_led = HIGH;
+    else if (state_led == '0') state_led = LOW;
+    digitalWrite(led_3, state_led);    }
+
+    if (inChar == '4')
+    {char state = (char)Serial.read();
+    int state_led = state;
+    if (state_led == '1') state_led = HIGH;
+    else if (state_led == '0') state_led = LOW;
+    digitalWrite(led_4, state_led);    }
+
+
+    if (inChar == '5')
+    {char state = (char)Serial.read();
+    int state_fan = state;
+    if (state_fan == '1') state_fan = HIGH;
+    else if (state_fan == '0') state_fan = LOW;
+    digitalWrite(fan, state_fan);    }
 
     if (inChar == '6')
+    {char state = (char)Serial.read();
+    int state_fan = state;
+    if (state_fan == '1') state_fan = HIGH;
+    else if (state_fan == '0') state_fan = LOW;
+    digitalWrite(fan_2, state_fan);    }
+
+
+    if (inChar == '7')
     {char state = (char)Serial.read();
     int state_garage_motor = state;
     if (state_garage_motor == '1'){
@@ -114,10 +139,10 @@ void serialEvent() {
     }
     }
 
-
     if (inChar == 'T')
         activate_sensor = "True";
     if (inChar == 'F')
         activate_sensor = "False";
     
 }
+
