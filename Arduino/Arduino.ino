@@ -95,12 +95,12 @@ void serialEvent() {
 
     if (inChar == '7'){
     digitalWrite(garage_motor_up,HIGH);
-    delay(3000);
+    delay(350);
     digitalWrite(garage_motor_up,LOW);
     }
     if (inChar == '8') {
     digitalWrite(garage_motor_down,HIGH);
-    delay(3000);
+    delay(400);
     digitalWrite(garage_motor_down,LOW);
     }
 
