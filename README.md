@@ -1,10 +1,13 @@
 Proyecto-Final
 
-
+Cambiar extensión de archivos (carpeta assets):
+.png ------ Para Windows
+.PPM ------ Para MacOs
+======
 Incluir librerias de Arduino(archivos en Helpers):
 OneWire
 DallasTemperature
-======
+
 ======
 
 ## Definición del proyecto: Casa Inteligente

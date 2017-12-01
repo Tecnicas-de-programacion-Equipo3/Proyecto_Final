@@ -1,4 +1,5 @@
 from Models.ProximityAlarm import ProximityAlarm
+from Models.ControllerLights import ControllerLights
 
 class HouseManager():
     class Constants:
@@ -12,7 +13,6 @@ class HouseManager():
         self.__motor_handler = motor_handler
         self.__alarm = None
 
-
     def house_menu(self, state, room):
         if room == self.Constants.Garage:
             self.garage_door()
@@ -20,15 +20,12 @@ class HouseManager():
             self.__alarm = ProximityAlarm(state, self.__alarm_handler)
             self.alarm()
         else:
-            self.control_lights()
+            ControllerLights(state, room, self.__lights_handler)
 
     def garage_door(self):
         pass
 
     def alarm(self):
-        pass
-
-    def control_lights(self):
         pass
 
     def actual_temperature(self):
