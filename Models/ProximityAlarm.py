@@ -1,12 +1,16 @@
+from Models.MessageAlarm import MessageAlarm
+
 class ProximityAlarm:
 
-    def __init__(self, status, alarm_handler):
+    def __init__(self, status, datas):
         self.__status = status
-        self.__alarm_handler = alarm_handler
-        self.__activate_alarm()
+        self.__data = datas
 
-    def __activate_alarm(self):
-        self.__alarm_handler(self.__status)
+    def there_is_someone(self):
+        if self.__status and self.__data == "True":
+            alarm_alert = MessageAlarm()
+            alarm_alert.send_message()
+
 
 
 
