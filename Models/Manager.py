@@ -25,7 +25,3 @@ class HouseManager():
     def alarm(self):
         pass
 
-    def actual_temperature(self):
-        pass
-
-

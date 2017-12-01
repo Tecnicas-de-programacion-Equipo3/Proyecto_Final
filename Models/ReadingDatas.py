@@ -15,9 +15,7 @@ class ReadingData:
         return clean_data
 
     def get_proximity_data(self):
-        print(self.__prox_sensor)
         return self.__prox_sensor
 
     def get_temperature_data(self):
-        print(self.__temperature)
         return self.__temperature
