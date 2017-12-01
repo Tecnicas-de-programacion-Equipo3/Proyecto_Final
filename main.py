@@ -12,7 +12,7 @@ class MainApp():
 
     def __init__(self):
         self.__master = MainView(tap_button_handler = self.__toggle_did_change, temperature_text = self.__update_temperature)
-        self.__arduino = serial.Serial(self.Constants.port, self.Constants.baud)
+        self.__arduino = serial.Serial(self.Constants.port_Mac, self.Constants.baud)
         self.__master.protocol(self.Constants.close_event, self.__on_closing)
         self.__house = HouseManager(lights_handler = self.__controller_lights, fan_handler = None, motor_handler = None)
         self.__datas = None

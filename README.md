@@ -1,12 +1,20 @@
 Proyecto-Final
 
-Cambiar extensión de archivos (carpeta assets):
+Cambiar extensión de archivos (archivo InterfaceConfigureParameters):
 .png ------ Para Windows
 .PPM ------ Para MacOs
+
 ======
 Incluir librerias de Arduino(archivos en Helpers):
 OneWire
 DallasTemperature
+
+======
+
+
+Cambiar puerto de arduino en main:
+port--------- Para Windows
+port_Mac----- Para MacOs
 
 ======
 
