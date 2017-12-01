@@ -14,9 +14,9 @@ class MainApp():
         self.__master = MainView(tap_button_handler = self.__toggle_did_change, temperature_text = self.__update_temperature)
         self.__arduino = serial.Serial(self.Constants.port, self.Constants.baud)
         self.__master.protocol(self.Constants.close_event, self.__on_closing)
-        self.__house = HouseManager(lights_handler = self.__controller_lights, fan_handler = None, motor_handler = self.__controller_garage )
+        self.__house = HouseManager(lights_handler = self.__controller_lights, fan_handler = None, motor_handler = None)
         self.__datas = None
-        #self.__receive_data()
+        self.__receive_data()
 
     def run(self):
         self.__master.mainloop()
@@ -33,11 +33,8 @@ class MainApp():
     def __update_temperature(self):
         pass
 
-    def __controller_lights(self, order):
-        arduino_order = order.encode('ascii')
-        self.__arduino.write(arduino_order)
 
-    def __controller_garage(self, order):
+    def __controller_lights(self, order):
         arduino_order = order.encode('ascii')
         self.__arduino.write(arduino_order)
 
