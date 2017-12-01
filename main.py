@@ -3,6 +3,7 @@ from Views.MainView import MainView
 from Models.Manager import HouseManager
 from Models.ReadingDatas import ReadingData
 from Models.ProximityAlarm import ProximityAlarm
+from Models.ControllerTemp import ControllerTemp
 
 class MainApp():
     class Constants:
@@ -30,6 +31,7 @@ class MainApp():
         self.__datas = ReadingData(datas)
         there_is = self.__datas.get_proximity_data()
         self.__is_someone(self.__house.alarm_state(), there_is)
+        self.__fans_updating(self.__datas.get_temperature_data())
         self.__master.after(2, self.__receive_data)
 
     def __update_temperature(self):
@@ -42,6 +44,11 @@ class MainApp():
     def __activate_alarm(self, is_active):
         activate = is_active.encode('ascii')
         self.__arduino.write(activate)
+
+    def __fans_updating(self, temperatures):
+        self.__fan = ControllerTemp(temperatures)
+        fan1 = self.__fan.fan1_function()
+        self.__controller_lights(fan1)
 
     def __controller_lights(self, order):
         arduino_order = order.encode('ascii')
