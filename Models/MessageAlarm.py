@@ -18,5 +18,5 @@ class MessageAlarm():
         self.__twilio_phone = env_var.get(self.Constants.twilio_phone, None)
         self.__client = Client(account_sid, auth_token)
 
-    def send_message(self, phone):
+    def send_message(self):
         self.__client.messages.create(to = self.Constants.phone, from_= self.__twilio_phone, body = self.Constants.message)
