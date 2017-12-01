@@ -31,7 +31,5 @@ class MainView(Tk):
         self.__term = Label(self, font = (UIGraphics.font_type, UIGraphics.font_size), bg = UIGraphics.bg_temp, textvariable = temperature_text )
         self.__term.place(x = UIGraphics.x_temp, y = UIGraphics.y_temp)
 
-        for button in UIGraphics.toggle_button_grapgics:
+        for button in UIGraphics.toggle_button_graphics:
             self.__creating_the_button = ToggleButton(self, self.__tap_button_handler, button[0], button[1], button[2], button[3], button[4], button[5] )
-
-

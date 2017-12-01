@@ -1,10 +1,12 @@
+from Models.ControllerLights import ControllerLights
+
 class HouseManager():
     class Constants:
         Garage = "Garage"
         Alarm = "Alarm"
 
     def __init__(self, lights_handler = None, fan_handler = None, motor_handler = None):
-        self.__temperature_handler = lights_handler
+        self.__lights_handler = lights_handler
         self.__fan_handler = fan_handler
         self.__motor_handler = motor_handler
 
@@ -15,15 +17,12 @@ class HouseManager():
         elif room == self.Constants.Alarm:
             self.alarm()
         else:
-            self.control_lights()
+            ControllerLights(state, room, self.__lights_handler)
 
     def garage_door(self):
         pass
 
     def alarm(self):
-        pass
-
-    def control_lights(self):
         pass
 
     def actual_temperature(self):
