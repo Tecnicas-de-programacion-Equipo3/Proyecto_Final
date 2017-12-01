@@ -5,7 +5,7 @@ from Models.ReadingDatas import ReadingData
 
 class MainApp():
     class Constants:
-        port = "COM3"
+        port = "COM4"
         port_Mac = "/dev/cu.usbmodem1411"
         baud = 115200
         close_event = "WM_DELETE_WINDOW"

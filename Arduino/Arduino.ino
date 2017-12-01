@@ -9,7 +9,6 @@ int fan_2 = 5;
 int sensorPIR = 8;
 int garage_motor_up = 7;
 int garage_motor_down = 6;
-int state_garage_motor = 0;
 String sensor_reading = "";
 String activate_sensor = "False";
 int Temp = 2;
@@ -19,7 +18,6 @@ DallasTemperature sensors(&oneWire);
 
 void setup() {
    Serial.begin(115200);
-   
    pinMode(led_1, OUTPUT);
    digitalWrite(led_1, LOW);
    pinMode(led_2, OUTPUT);
@@ -32,7 +30,6 @@ void setup() {
    digitalWrite(garage_motor_up,LOW);
    pinMode(garage_motor_down, OUTPUT);
    digitalWrite(garage_motor_down,LOW);
-
    pinMode(fan, OUTPUT);
    digitalWrite(fan, LOW);
    pinMode(fan_2, OUTPUT);
@@ -124,21 +121,18 @@ void serialEvent() {
     digitalWrite(fan_2, state_fan);    }
 
 
-    if (inChar == '7')
-    {char state = (char)Serial.read();
-    int state_garage_motor = state;
-    if (state_garage_motor == '1'){
+    if (inChar == '7'){
     digitalWrite(garage_motor_down,HIGH);
-    delay(10000);
+    delay(350);
     digitalWrite(garage_motor_down,LOW);
     }
-    if (state_garage_motor == '0'){
-    digitalWrite(garage_motor_up,HIGH);
-    delay(10000);
-    digitalWrite(garage_motor_up,LOW);
-    }
+    if (inChar == '8') {
+    digitalWrite(garage_motor_down,HIGH);
+    delay(400);
+    digitalWrite(garage_motor_down,LOW);
     }
 
+    }
     if (inChar == 'T')
         activate_sensor = "True";
     if (inChar == 'F')
