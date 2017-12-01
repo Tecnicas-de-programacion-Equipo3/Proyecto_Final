@@ -1,15 +1,15 @@
 class UIGraphics():
-    toggle_button_grapgics = [ ["Alarm", 745, 200, "assets/movement_on.png", "assets/movement_off.png", "#eee8dc"],
-        ["Garage", 750, 480, "assets/garage_closed.png", "assets/garage_opened.png", "#eee8dc"],
-        ["Bedroom1", 138, 255, "assets/sleep_on.png", "assets/sleep_off.png", None],
-        ["Bedroom2", 493, 255, "assets/sleep_on.png", "assets/sleep_off.png", None],
-        ["Livingroom", 493, 456, "assets/sala_on.png", "assets/sala_off.png", None],
-        ["Diningroom", 138, 456, "assets/comedor_on.png", "assets/comedor_off.png", None] ]
+    toggle_button_grapgics = [ ["Alarm", 745, 200, "assets/movement_on.PPM", "assets/movement_off.PPM", "#eee8dc"],
+        ["Garage", 750, 480, "assets/garage_closed.PPM", "assets/garage_opened.PPM", "#eee8dc"],
+        ["Bedroom1", 138, 255, "assets/sleep_on.PPM", "assets/sleep_off.PPM", None],
+        ["Bedroom2", 493, 255, "assets/sleep_on.PPM", "assets/sleep_off.PPM", None],
+        ["Livingroom", 493, 456, "assets/sala_on.PPM", "assets/sala_off.PPM", None],
+        ["Diningroom", 138, 456, "assets/comedor_on.PPM", "assets/comedor_off.PPM", None] ]
 
-    background_graphics = [["assets/BackGhouse.png", 50, 5, 600 ,None],
-        ["assets/lecturas.png",700, 5, 260, None]]
+    background_graphics = [["assets/BackGhouse.PPM", 50, 5, 600 ,None],
+        ["assets/lecturas.PPM",700, 5, 260, None]]
 
-    digital_term = "assets/lecturas.png"
+    digital_term = "assets/lecturas.PPM"
     x_clock_term = 700
     x_temp = 770
     y_temp = 60

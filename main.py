@@ -2,6 +2,7 @@ import serial
 from Views.MainView import MainView
 from Models.Manager import HouseManager
 from Models.ReadingDatas import ReadingData
+from Models.ControllerTemp import ControllerTemp
 
 class MainApp():
     class Constants:
@@ -28,11 +29,16 @@ class MainApp():
     def __receive_data(self):
         datas = self.__arduino.readline().decode()
         self.__datas = ReadingData(datas)
+        self.__fans_updating(self.__datas.get_temperature_data())
         self.__master.after(2, self.__receive_data)
 
     def __update_temperature(self):
         pass
 
+    def __fans_updating(self, temperatures):
+        self.__fan = ControllerTemp(temperatures)
+        fan1 = self.__fan.fan1_function()
+        self.__controller_lights(fan1)
 
     def __controller_lights(self, order):
         arduino_order = order.encode('ascii')
