@@ -8,7 +8,7 @@ class MessageAlarm():
         account_sid = "account_sid"
         auth_token = "auth_token"
         twilio_phone = "twilio_phone"
-        phone = "5560785905"
+        phone = "+525560785905"
 
     def __init__(self):
         env_var = OpenJson.opening(self.Constants.env_file)
