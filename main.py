@@ -6,7 +6,7 @@ from Models.ControllerTemp import ControllerTemp
 
 class MainApp():
     class Constants:
-        port = "COM4"
+        port = "COM3"
         port_Mac = "/dev/cu.usbmodem1411"
         baud = 115200
         close_event = "WM_DELETE_WINDOW"

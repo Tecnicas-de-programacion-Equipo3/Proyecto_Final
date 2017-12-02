@@ -132,7 +132,6 @@ void serialEvent() {
     digitalWrite(garage_motor_down,LOW);
     }
 
-    }
     if (inChar == 'T')
         activate_sensor = "True";
     if (inChar == 'F')
