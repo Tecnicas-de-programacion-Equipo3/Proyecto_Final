@@ -1,6 +1,6 @@
 
 from Models.ControllerLights import ControllerLights
-
+from Models.ControllerGarage import ControllerGarage
 class HouseManager():
     class Constants:
         Garage = "Garage"
@@ -14,7 +14,7 @@ class HouseManager():
 
     def house_menu(self, state, room):
         if room == self.Constants.Garage:
-            pass
+            ControllerGarage(state, room, self.__motor_handler)
         elif room == self.Constants.Alarm:
             #ProximityAlarm(state, self.__alarm_handler, self.__datas)
             if state:
@@ -27,4 +27,5 @@ class HouseManager():
 
     def alarm_state(self):
         return self.__alarm_state
+
 
