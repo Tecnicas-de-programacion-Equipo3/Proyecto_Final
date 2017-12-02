@@ -46,8 +46,6 @@ class ControllerLights():
              return self.Constants.Diningroom
 
     def __control_lights(self):
-
-
         state_room = self.__state_room()
         room = self.__room()
         self.__lights_handler(room+state_room)
