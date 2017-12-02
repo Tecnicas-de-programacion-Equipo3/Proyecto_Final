@@ -10,7 +10,7 @@ int sensorPIR = 8;
 int garage_motor_up = 7;
 int garage_motor_down = 6;
 String sensor_reading = "";
-String activate_sensor = "False";
+String activate_sensor = "None";
 int Temp = 2;
 OneWire oneWire(Temp); 
 DallasTemperature sensors(&oneWire);
@@ -136,6 +136,4 @@ void serialEvent() {
         activate_sensor = "True";
     if (inChar == 'F')
         activate_sensor = "False";
-    
-}
-
+    }    
