@@ -18,4 +18,4 @@ class UIGraphics():
     widthT = 211
     bg_temp = '#D0E9F3'
     font_type = 'Haettenschweiler'
-    font_size = 50
+    font_size = 38
