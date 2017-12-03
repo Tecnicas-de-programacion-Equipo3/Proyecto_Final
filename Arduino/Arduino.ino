@@ -65,11 +65,11 @@ void sendData(String proximity_sensor, int temperature_sensor){
 String proximitySensor(){
   int readingPIR = digitalRead(sensorPIR);
   if (readingPIR == HIGH){
-    delay(1000);
+    delay(2000);
     return "True";
     }
   else{
-    delay(1000);
+    delay(1500);
     return "False";
   }
 }
@@ -127,9 +127,9 @@ void serialEvent() {
     digitalWrite(garage_motor_down,LOW);
     }
     if (inChar == '8') {
-    digitalWrite(garage_motor_down,HIGH);
+    digitalWrite(garage_motor_up,HIGH);
     delay(400);
-    digitalWrite(garage_motor_down,LOW);
+    digitalWrite(garage_motor_up,LOW);
     }
 
     if (inChar == 'T')
