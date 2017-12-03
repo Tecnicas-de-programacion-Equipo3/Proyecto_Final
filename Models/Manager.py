@@ -5,6 +5,8 @@ class HouseManager():
     class Constants:
         Garage = "Garage"
         Alarm = "Alarm"
+        Alarm_active = "T"
+        Alarm_no_active = "F"
 
     def __init__(self, lights_handler = None, fan_handler = None, alarm_handler = None):
         self.__lights_handler = lights_handler
@@ -16,11 +18,10 @@ class HouseManager():
         if room == self.Constants.Garage:
             pass
         elif room == self.Constants.Alarm:
-            #ProximityAlarm(state, self.__alarm_handler, self.__datas)
             if state:
-                self.__alarm_handler('T')
+                self.__alarm_handler(self.Constants.Alarm_active)
             else:
-                self.__alarm_handler("F")
+                self.__alarm_handler(self.Constants.Alarm_no_active)
             self.__alarm_state = state
         else:
             ControllerLights(state, room, self.__lights_handler)
